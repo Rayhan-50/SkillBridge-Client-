@@ -185,8 +185,14 @@
     transform: translateY(-1px);
   }
 
-  /* Hero section gradient background */
+  /* Hero section gradient background — adapts to light/dark */
   .hero-gradient {
+    background: linear-gradient(135deg,
+      oklch(0.96 0.04 196) 0%,
+      oklch(0.92 0.06 230) 50%,
+      oklch(0.94 0.05 280) 100%);
+  }
+  .dark .hero-gradient {
     background: linear-gradient(135deg,
       oklch(0.12 0.04 220) 0%,
       oklch(0.1 0.06 270) 50%,
