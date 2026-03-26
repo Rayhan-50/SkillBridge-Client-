@@ -16,6 +16,22 @@ import {
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 
+// Suppress known harmless Three.js/WebGL warnings from the console
+if (typeof window !== "undefined") {
+  const originalWarn = console.warn;
+  console.warn = (...args: any[]) => {
+    const msg = String(args[0] || "");
+    if (
+      msg.includes("THREE.Clock") ||
+      msg.includes("THREE.WebGLProgram") ||
+      msg.includes("warning X4122")
+    ) {
+      return;
+    }
+    originalWarn(...args);
+  };
+}
+
 // ─── Individual 3D Objects ─────────────────────────────────────────────────────
 
 /** Open Book — two planes angled like an open book */
