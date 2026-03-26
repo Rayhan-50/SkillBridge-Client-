@@ -1,6 +1,11 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
+import TrustedBy from "@/components/sections/TrustedBy";
+import WhySkillBridge from "@/components/sections/WhySkillBridge";
+import Pricing from "@/components/sections/Pricing";
+import FAQ from "@/components/sections/FAQ";
+import Newsletter from "@/components/sections/Newsletter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -61,7 +66,10 @@ export default async function Home() {
         {/* ─────────────────────────── HERO ─────────────────────────── */}
         <Hero />
 
+        {/* ─────────────────────────── TRUSTED BY ────────────────────── */}
+        <TrustedBy />
 
+        {/* ─────────────────────────── STATS BAR ─────────────────────── */}
         <section className="bg-white dark:bg-gray-900 border-y border-border/50 py-8">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -79,6 +87,9 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* ─────────────────────────── WHY SKILLBRIDGE ─────────────── */}
+        <WhySkillBridge />
 
         {/* ─────────────────────────── CATEGORIES ────────────────────── */}
         <section className="py-24 bg-background">
@@ -214,6 +225,9 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ─────────────────────────── PRICING ────────────────────── */}
+        <Pricing />
+
         {/* ─────────────────────────── HOW IT WORKS ──────────────────── */}
         <section className="py-24 bg-background">
           <div className="container mx-auto px-4">
@@ -283,6 +297,12 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* ─────────────────────────── FAQ ─────────────────────────── */}
+        <FAQ />
+
+        {/* ─────────────────────────── NEWSLETTER ─────────────────────── */}
+        <Newsletter />
 
         {/* ─────────────────────────── CTA BANNER ────────────────────── */}
         <section className="py-20 bg-background">
