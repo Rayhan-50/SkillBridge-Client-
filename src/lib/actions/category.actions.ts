@@ -3,7 +3,10 @@
 import { revalidateTag } from "next/cache";
 import { Category } from "@/types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://skillbridge-server-nu.vercel.app/api";
+// Use BACKEND_URL for server-side API calls to avoid relative URL parsing errors
+const API_URL = process.env.BACKEND_URL 
+    ? `${process.env.BACKEND_URL}/api` 
+    : "https://skillbridge-server-nu.vercel.app/api";
 
 export async function getCategories(): Promise<Category[]> {
     try {
