@@ -13,7 +13,7 @@ import {
   MeshDistortMaterial,
   Sparkles,
 } from "@react-three/drei";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { EffectComposer, Bloom, DepthOfField, Vignette, Noise } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 // Suppress known harmless Three.js/WebGL warnings from the console
@@ -275,12 +275,13 @@ export default function Hero3DScene() {
       gl={{ alpha: true, antialias: true }}
       dpr={[1, 2]}
     >
-      {/* Lighting */}
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 8, 5]} intensity={1.2} color="#ffffff" />
+      {/* Cinematic Lighting */}
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[5, 8, 5]} intensity={1.5} color="#ffffff" castShadow />
+      <spotLight position={[0, 5, 0]} intensity={2.5} angle={0.6} penumbra={1} color="#e0e7ff" castShadow />
       <pointLight position={[-4, 2, 2]} intensity={1.8} color="#6366f1" />
       <pointLight position={[4, -2, -2]} intensity={1.5} color="#06b6d4" />
-      <pointLight position={[0, -3, 3]} intensity={1.0} color="#a78bfa" />
+      <pointLight position={[0, -3, 3]} intensity={1.2} color="#a78bfa" />
 
       {/* Environment for reflections */}
       <Environment preset="city" />
@@ -302,14 +303,17 @@ export default function Hero3DScene() {
         enableRotate={false}
       />
 
-      {/* Post-processing: Bloom glow */}
+      {/* Post-processing: Cinematic look */}
       <EffectComposer>
+        <DepthOfField focusDistance={0.02} focalLength={0.15} bokehScale={3} height={480} />
         <Bloom
-          intensity={0.8}
-          luminanceThreshold={0.3}
+          intensity={1.2}
+          luminanceThreshold={0.2}
           luminanceSmoothing={0.9}
           mipmapBlur
         />
+        <Vignette eskil={false} offset={0.1} darkness={1.1} />
+        <Noise opacity={0.04} />
       </EffectComposer>
     </Canvas>
   );
