@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -58,123 +59,9 @@ export default async function Home() {
       <main className="flex-1">
 
         {/* ─────────────────────────── HERO ─────────────────────────── */}
-        <section className="relative overflow-hidden hero-gradient min-h-[92vh] flex items-center">
-          {/* Ambient orbs */}
-          <div className="absolute top-1/4 -left-32 w-96 h-96 orb-teal" />
-          <div className="absolute bottom-1/4 -right-32 w-96 h-96 orb-purple" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] orb-purple opacity-30" />
+        <Hero />
 
-          {/* Grid overlay */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-                                linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)`,
-              backgroundSize: "48px 48px",
-            }}
-          />
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
-
-              {/* Left — text */}
-              <div>
-                <div className="inline-flex items-center gap-2 bg-primary/10 dark:bg-white/10 backdrop-blur-sm border border-primary/20 dark:border-white/20 rounded-full px-4 py-2 mb-6">
-                  <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
-                  <span className="text-sm text-foreground dark:text-white/90 font-medium">#1 Platform for Expert Tutoring</span>
-                </div>
-
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground dark:text-white leading-tight mb-6">
-                  Learn Faster with{" "}
-                  <span className="gradient-text">Expert Tutors</span>{" "}
-                  Built For You
-                </h1>
-
-                <p className="text-lg text-muted-foreground dark:text-white/70 max-w-lg mb-10 leading-relaxed">
-                  Master any subject with personalized 1-on-1 sessions from world-class educators. Flexible scheduling, verified experts, real results.
-                </p>
-
-                {/* Search bar */}
-                <div className="flex flex-col sm:flex-row gap-3 max-w-xl mb-10">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    <Input
-                      placeholder="What do you want to learn?"
-                      className="pl-12 h-13 text-base rounded-full bg-white dark:bg-white/10 border-border dark:border-white/20 dark:text-white dark:placeholder:text-white/50 backdrop-blur-sm focus-visible:ring-primary"
-                    />
-                  </div>
-                  <Button
-                    size="lg"
-                    className="h-13 rounded-full px-8 text-base gradient-btn border-0 shadow-xl font-semibold shrink-0"
-                    asChild
-                  >
-                    <Link href={ROUTES.TUTORS}>Find Tutors <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                  </Button>
-                </div>
-
-                {/* Trust badges */}
-                <div className="flex flex-wrap gap-5 text-sm text-muted-foreground dark:text-white/70">
-                  {["500+ Verified Experts", "Flexible Scheduling", "Secure Payments"].map((item) => (
-                    <div key={item} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right — hero illustration */}
-              <div className="relative hidden lg:flex items-center justify-center">
-                {/* Glow behind image */}
-                <div className="absolute inset-0 orb-teal scale-75" />
-                <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/10 w-full max-w-md">
-                  <Image
-                    src="/hero-illustration.png"
-                    alt="Student learning with a tutor online"
-                    width={600}
-                    height={400}
-                    className="w-full h-auto object-cover"
-                    priority
-                  />
-                </div>
-
-                {/* Floating UI chips */}
-                <div className="absolute -top-4 -left-8 bg-white dark:bg-white/10 dark:backdrop-blur-md border border-border dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
-                  <div className="w-9 h-9 rounded-full gradient-btn flex items-center justify-center shrink-0">
-                    <GraduationCap className="h-4 w-4 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground dark:text-white/60">Students</p>
-                    <p className="font-bold text-foreground dark:text-white text-sm">12,400+</p>
-                  </div>
-                </div>
-
-                <div className="absolute -bottom-4 -right-8 bg-white dark:bg-white/10 dark:backdrop-blur-md border border-border dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
-                  <div className="w-9 h-9 rounded-full bg-yellow-100 dark:bg-yellow-400/20 flex items-center justify-center shrink-0">
-                    <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground dark:text-white/60">Avg Rating</p>
-                    <p className="font-bold text-foreground dark:text-white text-sm">4.9 / 5.0</p>
-                  </div>
-                </div>
-
-                <div className="absolute top-1/2 -translate-y-1/2 -right-10 bg-white dark:bg-white/10 dark:backdrop-blur-md border border-border dark:border-white/10 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-xl">
-                  <div className="w-9 h-9 rounded-full bg-purple-100 dark:bg-purple-400/20 flex items-center justify-center shrink-0">
-                    <Clock className="h-4 w-4 text-purple-500 dark:text-purple-300" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground dark:text-white/60">Sessions Today</p>
-                    <p className="font-bold text-foreground dark:text-white text-sm">340 Live</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* ─────────────────────────── STATS BAR ─────────────────────── */}
         <section className="bg-white dark:bg-gray-900 border-y border-border/50 py-8">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
