@@ -13,7 +13,7 @@ export async function getCategories(): Promise<Category[]> {
         const response = await fetch(`${API_URL}/categories`, {
             next: {
                 revalidate: 3600, // Revalidate every hour
-                tags: ["categories"],
+                tags: ["categories-v2"],
             },
         });
 
@@ -31,6 +31,6 @@ export async function getCategories(): Promise<Category[]> {
 
 export async function revalidateCategoriesCache() {
     // @ts-expect-error - Next.js 16 canary type strictly requires a second 'profile' argument, but it works at runtime
-    revalidateTag("categories");
+    revalidateTag("categories-v2");
     return { revalidated: true, now: Date.now() };
 }
