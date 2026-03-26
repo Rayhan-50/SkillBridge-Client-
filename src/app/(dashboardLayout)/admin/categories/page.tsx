@@ -134,7 +134,7 @@ export default function AdminCategoriesPage() {
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                 placeholder="e.g. Data Science"
                                                 required
-                                                className="bg-white"
+                                                className="bg-white text-gray-900"
                                             />
                                         </div>
                                         <div>
@@ -144,7 +144,7 @@ export default function AdminCategoriesPage() {
                                                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                                                 placeholder="e.g. data-science"
                                                 required
-                                                className="bg-white"
+                                                className="bg-white text-gray-900"
                                             />
                                         </div>
                                         <div>
@@ -154,7 +154,7 @@ export default function AdminCategoriesPage() {
                                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                                 placeholder="Brief description about the category"
                                                 rows={2}
-                                                className="bg-white resize-none"
+                                                className="bg-white text-gray-900 resize-none"
                                             />
                                         </div>
                                         <div>
@@ -163,7 +163,7 @@ export default function AdminCategoriesPage() {
                                                 value={formData.iconUrl}
                                                 onChange={(e) => setFormData({ ...formData, iconUrl: e.target.value })}
                                                 placeholder="https://example.com/icon.png"
-                                                className="bg-white"
+                                                className="bg-white text-gray-900"
                                             />
                                         </div>
                                     </div>
@@ -257,7 +257,7 @@ export default function AdminCategoriesPage() {
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                         required
-                                        className="bg-white"
+                                        className="bg-white text-gray-900"
                                     />
                                 </div>
                                 <div>
@@ -266,7 +266,7 @@ export default function AdminCategoriesPage() {
                                         value={formData.slug}
                                         onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                                         required
-                                        className="bg-white"
+                                        className="bg-white text-gray-900"
                                     />
                                 </div>
                                 <div>
@@ -275,7 +275,7 @@ export default function AdminCategoriesPage() {
                                         value={formData.description}
                                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                         rows={2}
-                                        className="bg-white resize-none"
+                                        className="bg-white text-gray-900 resize-none"
                                     />
                                 </div>
                                 <div>
@@ -284,7 +284,7 @@ export default function AdminCategoriesPage() {
                                         value={formData.iconUrl}
                                         onChange={(e) => setFormData({ ...formData, iconUrl: e.target.value })}
                                         placeholder="https://example.com/icon.png"
-                                        className="bg-white"
+                                        className="bg-white text-gray-900"
                                     />
                                 </div>
                             </div>
