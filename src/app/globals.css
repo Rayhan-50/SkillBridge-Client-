@@ -239,4 +239,89 @@
     mask-composite: exclude;
     pointer-events: none;
   }
+
+  /* ——————————————————————————————————————
+     Sonner Toast — Branded Styles
+  —————————————————————————————————————— */
+
+  /* Base toast */
+  .sb-toast {
+    background: var(--popover) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 32px oklch(0 0 0 / 10%), 0 2px 8px oklch(0 0 0 / 6%) !important;
+    padding: 14px 16px !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 280px;
+  }
+
+  /* Success — teal → purple gradient */
+  .sb-toast--success {
+    background: linear-gradient(135deg, oklch(0.55 0.18 196) 0%, oklch(0.58 0.22 295) 100%) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px oklch(0.55 0.18 196 / 30%), 0 2px 8px oklch(0.58 0.22 295 / 20%) !important;
+    color: white !important;
+  }
+  .sb-toast--success .sb-toast__title {
+    color: white !important;
+    font-weight: 600;
+  }
+  .sb-toast--success .sb-toast__description {
+    color: oklch(1 0 0 / 80%) !important;
+  }
+
+  /* Error — vivid red gradient */
+  .sb-toast--error {
+    background: linear-gradient(135deg, oklch(0.52 0.22 22) 0%, oklch(0.48 0.24 8) 100%) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px oklch(0.52 0.22 22 / 30%) !important;
+    color: white !important;
+  }
+  .sb-toast--error .sb-toast__title {
+    color: white !important;
+    font-weight: 600;
+  }
+  .sb-toast--error .sb-toast__description {
+    color: oklch(1 0 0 / 80%) !important;
+  }
+
+  /* Warning — amber tone */
+  .sb-toast--warning {
+    background: linear-gradient(135deg, oklch(0.72 0.16 72) 0%, oklch(0.66 0.18 52) 100%) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px oklch(0.72 0.16 72 / 25%) !important;
+    color: white !important;
+  }
+  .sb-toast--warning .sb-toast__title {
+    color: white !important;
+    font-weight: 600;
+  }
+
+  /* Info — cool teal */
+  .sb-toast--info {
+    background: linear-gradient(135deg, oklch(0.48 0.16 220) 0%, oklch(0.5 0.18 240) 100%) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px oklch(0.48 0.16 220 / 25%) !important;
+    color: white !important;
+  }
+  .sb-toast--info .sb-toast__title {
+    color: white !important;
+    font-weight: 600;
+  }
+
+  /* Icon container alignment */
+  .sb-toast__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: oklch(1 0 0 / 20%);
+  }
 }

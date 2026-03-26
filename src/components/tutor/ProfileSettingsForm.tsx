@@ -10,6 +10,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import api from "@/lib/api";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogFooter,
+} from "@/components/ui/dialog";
+import { CheckCircle2 } from "lucide-react";
 
 const validateWithZod = (schema: z.ZodTypeAny) => ({ value }: { value: any }) => {
     const result = schema.safeParse(value);
@@ -30,6 +39,7 @@ const TutorProfileSchema = z.object({
 export function ProfileSettingsForm() {
     const [loading, setLoading] = useState(false);
     const [initialFetchDone, setInitialFetchDone] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const form = useForm({
         defaultValues: {
@@ -55,7 +65,7 @@ export function ProfileSettingsForm() {
 
                 const response = await api.patch('/tutor/profile', payload);
                 if (response.data.success) {
-                    toast.success("Profile updated successfully!");
+                    setShowSuccess(true);
                 }
             } catch (err: any) {
                 toast.error(err.response?.data?.message || err.message || "Failed to update profile");
@@ -94,6 +104,7 @@ export function ProfileSettingsForm() {
     }
 
     return (
+        <>
         <form
             onSubmit={(e) => {
                 e.preventDefault();
@@ -240,9 +251,33 @@ export function ProfileSettingsForm() {
                 )}
             </form.Field>
 
-            <Button type="submit" disabled={loading} className="w-full md:w-auto">
+            <Button type="submit" disabled={loading} className="gradient-btn border-0 rounded-full px-8 shadow-md">
                 {loading ? "Saving changes..." : "Save Profile Settings"}
             </Button>
         </form>
+
+        {/* ── Success Modal ── */}
+        <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+            <DialogContent className="sm:max-w-md text-center rounded-2xl">
+                <DialogHeader className="items-center gap-3">
+                    <div className="w-16 h-16 rounded-2xl gradient-btn flex items-center justify-center shadow-lg mx-auto">
+                        <CheckCircle2 className="h-8 w-8 text-white" />
+                    </div>
+                    <DialogTitle className="text-xl font-bold">Profile Updated!</DialogTitle>
+                    <DialogDescription className="text-muted-foreground text-sm">
+                        Your tutor profile has been saved successfully. Students can now see your updated information.
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className="sm:justify-center mt-2">
+                    <Button
+                        className="gradient-btn border-0 rounded-full px-8"
+                        onClick={() => setShowSuccess(false)}
+                    >
+                        Awesome, thanks!
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+        </>
     );
 }
