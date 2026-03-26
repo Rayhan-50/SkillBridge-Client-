@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { adminService } from "@/services/admin.service";
 import { tutorService } from "@/services/tutor.service";
+import { revalidateCategoriesCache } from "@/lib/actions/category.actions";
 import { PageHeader } from "@/components/common/PageHeader";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,7 @@ export default function AdminCategoriesPage() {
             setFormData({ name: "", slug: "", description: "", iconUrl: "" });
             queryClient.invalidateQueries({ queryKey: ["adminCategories"] });
             queryClient.invalidateQueries({ queryKey: ["categories"] });
+            revalidateCategoriesCache();
         },
         onError: (err: any) => {
             toast.error(err.response?.data?.message || "Failed to create category");
@@ -55,6 +57,7 @@ export default function AdminCategoriesPage() {
             setCurrentCategory(null);
             queryClient.invalidateQueries({ queryKey: ["adminCategories"] });
             queryClient.invalidateQueries({ queryKey: ["categories"] });
+            revalidateCategoriesCache();
         },
         onError: (err: any) => {
             toast.error(err.response?.data?.message || "Failed to update category");
@@ -67,6 +70,7 @@ export default function AdminCategoriesPage() {
             toast.success("Category deleted successfully");
             queryClient.invalidateQueries({ queryKey: ["adminCategories"] });
             queryClient.invalidateQueries({ queryKey: ["categories"] });
+            revalidateCategoriesCache();
         },
         onError: (err: any) => {
             toast.error(err.response?.data?.message || "Failed to delete category");

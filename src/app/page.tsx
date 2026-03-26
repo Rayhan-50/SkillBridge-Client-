@@ -18,6 +18,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TutorProfile, Review } from "@/types";
 import Image from "next/image";
+import { getCategories } from "@/lib/actions/category.actions";
+import { CategoriesCarousel } from "@/components/categories/CategoriesCarousel";
 
 async function getTopTutors(): Promise<TutorProfile[]> {
   try {
@@ -48,7 +50,10 @@ async function getTutorReviews(tutorId: string): Promise<Review[]> {
 }
 
 export default async function Home() {
-  const topTutors = await getTopTutors();
+  const [topTutors, categories] = await Promise.all([
+    getTopTutors(),
+    getCategories()
+  ]);
 
   let actualReviews: Review[] = [];
   if (topTutors.length > 0) {
@@ -106,34 +111,11 @@ export default async function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {[
-                { title: "Mathematics", icon: BookOpen, desc: "Calculus, Algebra, Geometry", count: 124, color: "from-teal-500 to-cyan-400" },
-                { title: "Programming", icon: Zap, desc: "React, Python, Node.js", count: 342, color: "from-violet-500 to-purple-400" },
-                { title: "Languages", icon: Users, desc: "English, Spanish, French", count: 215, color: "from-pink-500 to-rose-400" },
-                { title: "Sciences", icon: ShieldCheck, desc: "Physics, Chemistry, Bio", count: 189, color: "from-amber-500 to-orange-400" },
-              ].map((cat, i) => (
-                <Link
-                  key={i}
-                  href={`${ROUTES.TUTORS}?category=${cat.title.toLowerCase()}`}
-                  className="group relative overflow-hidden rounded-2xl border border-border/50 bg-card p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300"
-                >
-                  <div className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${cat.color} shadow-md group-hover:scale-110 transition-transform`}>
-                    <cat.icon className="h-5 w-5 text-white" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-1">{cat.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{cat.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold gradient-text">{cat.count} Tutors</span>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <CategoriesCarousel categories={categories} />
 
             <div className="text-center mt-10">
               <Button variant="outline" asChild className="rounded-full px-8">
-                <Link href={ROUTES.TUTORS}>View All Categories</Link>
+                <Link href={ROUTES.CATEGORIES}>View All Categories</Link>
               </Button>
             </div>
           </div>

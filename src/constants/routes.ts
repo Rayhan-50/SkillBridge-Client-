@@ -3,6 +3,7 @@ export const ROUTES = {
     LOGIN: "/login",
     REGISTER: "/register",
     TUTORS: "/tutors",
+    CATEGORIES: "/categories",
     STUDENT_DASHBOARD: "/dashboard",
     TUTOR_DASHBOARD: "/tutor/dashboard",
     ADMIN_DASHBOARD: "/admin",
@@ -13,6 +14,7 @@ export const PUBLIC_ROUTES = [
     ROUTES.LOGIN,
     ROUTES.REGISTER,
     ROUTES.TUTORS,
+    ROUTES.CATEGORIES,
 ];
 
 export const STUDENT_ROUTES = ["/dashboard"];

@@ -3,7 +3,12 @@ import { User } from "./user.types";
 export interface Category {
     id: string;
     name: string;
+    slug: string;
     description?: string;
+    iconUrl?: string;
+    _count?: {
+        bookings: number;
+    };
 }
 
 export interface TutorProfile {
