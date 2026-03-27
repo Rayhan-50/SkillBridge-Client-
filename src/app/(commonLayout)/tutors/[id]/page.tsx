@@ -148,7 +148,7 @@ export default function TutorDetailPage() {
             {/* Reviews Section */}
             <div className="mt-16 border-t pt-12">
                 <h3 className="text-2xl font-bold mb-8">Student Reviews</h3>
-                {tutor.reviews?.length > 0 ? (
+                {tutor.reviews && tutor.reviews.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {tutor.reviews.map((review: any) => (
                             <div key={review.id} className="p-6 border rounded-xl bg-card shadow-sm">
