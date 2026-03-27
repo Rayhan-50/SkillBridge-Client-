@@ -88,27 +88,33 @@ export default function StudentBookingsPage() {
                                                     </Badge>
                                                 </TableCell>
                                                 <TableCell className="text-right">
-                                                    {b.status === "CONFIRMED" && b.meetingLink ? (
-                                                        <Button size="sm" asChild>
-                                                            <a href={b.meetingLink} target="_blank" rel="noreferrer">
-                                                                <Video className="mr-2 h-4 w-4" /> Join
-                                                            </a>
-                                                        </Button>
-                                                    ) : b.status === "COMPLETED" ? (
-                                                        alreadyReviewed ? (
-                                                            <span className="inline-flex items-center gap-1.5 text-xs text-green-600 font-medium">
-                                                                <CheckCircle2 className="h-4 w-4" /> Reviewed
-                                                            </span>
-                                                        ) : (
-                                                            <ReviewModal booking={b}>
-                                                                <Button size="sm" variant="outline">
-                                                                    Leave Review
-                                                                </Button>
-                                                            </ReviewModal>
-                                                        )
-                                                    ) : (
-                                                        <span className="text-xs text-muted-foreground">No Actions</span>
-                                                    )}
+                                                    <div className="flex items-center justify-end gap-2">
+                                                        {b.status === "CONFIRMED" && b.meetingLink && (
+                                                            <Button size="sm" asChild>
+                                                                <a href={b.meetingLink} target="_blank" rel="noreferrer">
+                                                                    <Video className="mr-2 h-4 w-4" /> Join
+                                                                </a>
+                                                            </Button>
+                                                        )}
+                                                        
+                                                        {(b.status === "COMPLETED" || b.status === "CONFIRMED") && (
+                                                            alreadyReviewed ? (
+                                                                <span className="inline-flex items-center gap-1.5 text-xs text-green-600 font-medium">
+                                                                    <CheckCircle2 className="h-4 w-4" /> Reviewed
+                                                                </span>
+                                                            ) : (
+                                                                <ReviewModal booking={b}>
+                                                                    <Button size="sm" variant="outline">
+                                                                        Leave Review
+                                                                    </Button>
+                                                                </ReviewModal>
+                                                            )
+                                                        )}
+                                                        
+                                                        {b.status !== "COMPLETED" && b.status !== "CONFIRMED" && (
+                                                            <span className="text-xs text-muted-foreground">No Actions</span>
+                                                        )}
+                                                    </div>
                                                 </TableCell>
                                             </TableRow>
                                         );
