@@ -145,15 +145,43 @@ export default function TutorDetailPage() {
                 </div>
             </div>
 
-            {/* Reviews Section - To Be Enhanced */}
+            {/* Reviews Section */}
             <div className="mt-16 border-t pt-12">
                 <h3 className="text-2xl font-bold mb-8">Student Reviews</h3>
-                <EmptyState
-                    icon={MessageSquare}
-                    title="No reviews yet"
-                    description="This tutor is new or hasn't received any reviews yet. Be the first to book a session and leave a review!"
-                    className="bg-transparent border-dashed py-12"
-                />
+                {tutor.reviews?.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {tutor.reviews.map((review: any) => (
+                            <div key={review.id} className="p-6 border rounded-xl bg-card shadow-sm">
+                                <div className="flex items-center gap-4 mb-4">
+                                    <Avatar className="h-10 w-10">
+                                        <AvatarImage src={review.student?.image || ""} />
+                                        <AvatarFallback>{review.student?.name?.[0] || "S"}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <div className="font-semibold text-sm">{review.student?.name || "Student"}</div>
+                                        <div className="text-xs text-muted-foreground">{format(new Date(review.createdAt), "MMM d, yyyy")}</div>
+                                    </div>
+                                    <div className="ml-auto flex items-center bg-yellow-500/10 text-yellow-600 px-2 py-1 rounded-md text-xs font-medium">
+                                        <Star className="h-3 w-3 mr-1 fill-current" />
+                                        {review.rating.toFixed(1)}
+                                    </div>
+                                </div>
+                                {review.comment ? (
+                                    <p className="text-muted-foreground text-sm leading-relaxed">{review.comment}</p>
+                                ) : (
+                                    <p className="text-muted-foreground/50 text-sm italic">No comment provided.</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <EmptyState
+                        icon={MessageSquare}
+                        title="No reviews yet"
+                        description="This tutor is new or hasn't received any reviews yet. Be the first to book a session and leave a review!"
+                        className="bg-transparent border-dashed py-12"
+                    />
+                )}
             </div>
         </div>
     );
