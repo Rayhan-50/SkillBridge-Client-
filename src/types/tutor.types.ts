@@ -20,6 +20,7 @@ export interface TutorProfile {
     rating: number;
     totalReviews: number;
     categories: Category[];
+    reviews?: any[];
     subjects?: string[];
     languages?: string[];
     location?: string;
