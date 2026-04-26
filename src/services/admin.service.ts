@@ -9,8 +9,7 @@ export const adminService = {
     },
 
     updateUserStatus: async (userId: string, isBanned: boolean): Promise<User> => {
-        // Assuming PATCH /api/admin/users/:id expects { banned: true/false }
-        const response = await api.patch<User>(`/admin/users/${userId}`, { banned: isBanned });
+        const response = await api.patch<User>(`/admin/users/${userId}`, { status: isBanned ? "BANNED" : "ACTIVE" });
         return response.data;
     },
 

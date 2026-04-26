@@ -130,7 +130,7 @@ export default function AdminUsersPage() {
                                                 {format(new Date(u.createdAt), "MMM d, yyyy")}
                                             </TableCell>
                                             <TableCell>
-                                                {u.banned ? (
+                                                {u.status === "BANNED" ? (
                                                     <Badge variant="destructive" className="bg-destructive/10 text-destructive hover:bg-destructive/20 border-transparent">Banned</Badge>
                                                 ) : (
                                                     <Badge variant="outline" className="bg-green-500/10 text-green-600 hover:bg-green-500/20 border-transparent border-green-500/20 dark:text-green-400">Active</Badge>
@@ -148,10 +148,10 @@ export default function AdminUsersPage() {
                                                         
                                                         {u.role !== "ADMIN" && (
                                                             <DropdownMenuItem 
-                                                                onClick={() => toggleBanStatus.mutate({ id: u.id, isBanned: !u.banned })}
+                                                                onClick={() => toggleBanStatus.mutate({ id: u.id, isBanned: u.status !== "BANNED" })}
                                                                 disabled={toggleBanStatus.isPending}
                                                             >
-                                                                {u.banned ? (
+                                                                {u.status === "BANNED" ? (
                                                                     <><ShieldCheck className="mr-2 h-4 w-4 text-green-500" /> Unban User</>
                                                                 ) : (
                                                                     <><ShieldAlert className="mr-2 h-4 w-4 text-orange-500" /> Ban User</>

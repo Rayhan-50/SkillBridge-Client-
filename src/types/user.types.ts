@@ -7,9 +7,7 @@ export interface User {
     createdAt: Date;
     updatedAt: Date;
     role: "STUDENT" | "TUTOR" | "ADMIN";
-    banned?: boolean;
-    banReason?: string | null;
-    banExpires?: Date | null;
+    status?: "ACTIVE" | "INACTIVE" | "BANNED";
 }
 
 export interface Session {
