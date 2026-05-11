@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `${process.env.BACKEND_URL || "https://skillbridge-server-nu.vercel.app"}/api/:path*`,
+        destination: `${process.env.BACKEND_URL || "http://localhost:4000"}/api/:path*`,
       },
     ];
   },

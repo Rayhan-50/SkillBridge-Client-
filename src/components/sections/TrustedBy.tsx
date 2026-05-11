@@ -19,16 +19,16 @@ const doubled = [...brands, ...brands];
 
 export default function TrustedBy() {
   return (
-    <section className="py-12 border-y border-border/40 bg-muted/20 overflow-hidden">
-      <p className="text-center text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-8">
+    <section className="py-12 border-y border-slate-100 dark:border-emerald-950/20 bg-[#f8fafc] dark:bg-[#0a232f] overflow-hidden">
+      <p className="text-center text-xs uppercase tracking-widest text-slate-500 font-semibold mb-8">
         Trusted by learners from top institutions
       </p>
 
       {/* Marquee track */}
       <div className="relative">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-[#f8fafc] dark:from-[#0a232f] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-[#f8fafc] dark:from-[#0a232f] to-transparent z-10 pointer-events-none" />
 
         <div
           className="flex gap-10 w-max"
@@ -37,10 +37,10 @@ export default function TrustedBy() {
           {doubled.map((brand, i) => (
             <div
               key={i}
-              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-border/50 bg-card/60 backdrop-blur-sm whitespace-nowrap select-none"
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-slate-200 dark:border-emerald-950/40 bg-white dark:bg-[#0c2a37] backdrop-blur-sm whitespace-nowrap select-none animate-none"
             >
               <span className="text-xl">{brand.emoji}</span>
-              <span className="text-sm font-semibold text-foreground/70">
+              <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                 {brand.name}
               </span>
             </div>

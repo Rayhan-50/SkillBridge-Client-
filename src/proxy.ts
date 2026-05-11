@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PUBLIC_ROUTES, ROUTES } from "@/constants/routes";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip static files, API routes, etc.
@@ -31,33 +31,41 @@ export async function middleware(request: NextRequest) {
   let userRole: string | undefined;
 
   try {
-    const apiUrl = `${process.env.BACKEND_URL || "https://skillbridge-server-nu.vercel.app"}/api`;
+    const apiUrl = `${process.env.BACKEND_URL || "http://localhost:4000"}/api`;
     const baseUrl = apiUrl.endsWith("/api") ? `${apiUrl}/auth` : apiUrl.replace("/api/v1", "/api/auth");
+
+    // 5-second timeout to prevent the whole site from hanging on cold-starts
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
 
     const response = await fetch(`${baseUrl}/get-session`, {
       headers: {
         cookie: request.headers.get("cookie") || "",
       },
       cache: "no-store",
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       const data = await response.json();
       isAuthenticated = !!data?.user;
       userRole = data?.user?.role;
     }
-  } catch (err) {
-    console.error("[Middleware] Session fetch failed:", err);
+  } catch (err: any) {
+    if (err.name === "AbortError") {
+      console.error("[Proxy] Session fetch timed out");
+    } else {
+      console.error("[Proxy] Session fetch failed:", err);
+    }
   }
-
-  console.log(`[Middleware] ${pathname} → Auth: ${isAuthenticated}, Role: ${userRole}`);
 
   // ────────────────────────────────────────────────
   // If authenticated → redirect AWAY from login/register
   // ────────────────────────────────────────────────
   if (isAuthenticated) {
     if (pathname === ROUTES.LOGIN || pathname === ROUTES.REGISTER) {
-      console.log(`[Middleware] Redirecting logged-in user away from ${pathname}`);
       let redirectTo: string = ROUTES.STUDENT_DASHBOARD;
       if (userRole === "TUTOR") redirectTo = ROUTES.TUTOR_DASHBOARD;
       if (userRole === "ADMIN") redirectTo = ROUTES.ADMIN_DASHBOARD;
@@ -84,7 +92,6 @@ export async function middleware(request: NextRequest) {
   // Not authenticated → force login for protected routes
   // ────────────────────────────────────────────────
   if (!isAuthenticated && !isPublicRoute) {
-    console.log(`[Middleware] Redirecting unauthenticated user to login from ${pathname}`);
     return NextResponse.redirect(new URL(ROUTES.LOGIN, request.url));
   }
 

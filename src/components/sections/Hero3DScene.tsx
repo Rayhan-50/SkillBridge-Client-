@@ -50,31 +50,31 @@ function FloatingBook() {
       <group ref={groupRef} position={[0, 0, 0]}>
         {/* Book spine */}
         <Box args={[0.08, 1.4, 1.0]} position={[0, 0, 0]}>
-          <meshStandardMaterial color="#4f46e5" roughness={0.3} metalness={0.6} />
+          <meshStandardMaterial color="#001e2b" roughness={0.3} metalness={0.6} />
         </Box>
 
         {/* Left page */}
         <Box args={[0.02, 1.3, 0.95]} position={[-0.55, 0, 0]} rotation={[0, 0.35, 0]}>
-          <meshStandardMaterial color="#e0e7ff" roughness={0.8} metalness={0.1} />
+          <meshStandardMaterial color="#f4f7f6" roughness={0.8} metalness={0.1} />
         </Box>
 
         {/* Right page */}
         <Box args={[0.02, 1.3, 0.95]} position={[0.55, 0, 0]} rotation={[0, -0.35, 0]}>
-          <meshStandardMaterial color="#f0f4ff" roughness={0.8} metalness={0.1} />
+          <meshStandardMaterial color="#e3fcef" roughness={0.8} metalness={0.1} />
         </Box>
 
         {/* Page lines (simplified as thin boxes) */}
         {[-0.3, -0.1, 0.1, 0.3].map((y, i) => (
           <Box key={i} args={[0.01, 0.02, 0.6]} position={[-0.5, y, 0]} rotation={[0, 0.35, 0]}>
-            <meshStandardMaterial color="#818cf8" emissive="#818cf8" emissiveIntensity={0.3} />
+            <meshStandardMaterial color="#00a35c" emissive="#00a35c" emissiveIntensity={0.3} />
           </Box>
         ))}
 
         {/* Glowing cover edge */}
         <Box args={[0.1, 1.42, 1.02]} position={[0, 0, 0]}>
           <meshStandardMaterial
-            color="#6366f1"
-            emissive="#6366f1"
+            color="#00ed64"
+            emissive="#00ed64"
             emissiveIntensity={0.4}
             transparent
             opacity={0.3}
@@ -101,8 +101,8 @@ function FloatingGraduationCap() {
         {/* Cap board */}
         <Box args={[1.1, 0.07, 1.1]} position={[0, 0, 0]}>
           <meshStandardMaterial
-            color="#7c3aed"
-            emissive="#7c3aed"
+            color="#7b3ff2"
+            emissive="#7b3ff2"
             emissiveIntensity={0.5}
             metalness={0.7}
             roughness={0.2}
@@ -111,22 +111,22 @@ function FloatingGraduationCap() {
 
         {/* Cap top button */}
         <Cylinder args={[0.06, 0.06, 0.12, 8]} position={[0, 0.1, 0]}>
-          <meshStandardMaterial color="#a78bfa" emissive="#a78bfa" emissiveIntensity={0.8} />
+          <meshStandardMaterial color="#fa6e39" emissive="#fa6e39" emissiveIntensity={0.8} />
         </Cylinder>
 
         {/* Cap base / dome */}
         <Cylinder args={[0.42, 0.38, 0.28, 16]} position={[0, -0.17, 0]}>
-          <meshStandardMaterial color="#5b21b6" metalness={0.5} roughness={0.4} />
+          <meshStandardMaterial color="#3d4f9f" metalness={0.5} roughness={0.4} />
         </Cylinder>
 
         {/* Tassel string */}
         <Cylinder args={[0.012, 0.012, 0.6, 6]} position={[0.38, -0.25, 0.38]}>
-          <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={0.6} />
+          <meshStandardMaterial color="#fa6e39" emissive="#fa6e39" emissiveIntensity={0.6} />
         </Cylinder>
 
         {/* Tassel end */}
         <Sphere args={[0.06, 8, 8]} position={[0.38, -0.58, 0.38]}>
-          <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={1} />
+          <meshStandardMaterial color="#fa6e39" emissive="#fa6e39" emissiveIntensity={1} />
         </Sphere>
       </group>
     </Float>
@@ -150,8 +150,8 @@ function FloatingAtom() {
         {/* Nucleus */}
         <Sphere args={[0.18, 16, 16]}>
           <meshStandardMaterial
-            color="#06b6d4"
-            emissive="#06b6d4"
+            color="#00ed64"
+            emissive="#00ed64"
             emissiveIntensity={1}
             metalness={0.3}
             roughness={0.1}
@@ -160,17 +160,17 @@ function FloatingAtom() {
 
         {/* Orbital ring 1 */}
         <Torus args={[0.5, 0.025, 8, 48]} rotation={[Math.PI / 2, 0, 0]}>
-          <meshStandardMaterial color="#22d3ee" emissive="#22d3ee" emissiveIntensity={0.8} />
+          <meshStandardMaterial color="#00a35c" emissive="#00a35c" emissiveIntensity={0.8} />
         </Torus>
 
         {/* Orbital ring 2 — tilted */}
         <Torus args={[0.5, 0.025, 8, 48]} rotation={[Math.PI / 4, Math.PI / 6, 0]}>
-          <meshStandardMaterial color="#818cf8" emissive="#818cf8" emissiveIntensity={0.8} />
+          <meshStandardMaterial color="#3d4f9f" emissive="#3d4f9f" emissiveIntensity={0.8} />
         </Torus>
 
         {/* Orbital ring 3 — perpendicular */}
         <Torus args={[0.5, 0.025, 8, 48]} rotation={[0, 0, Math.PI / 3]}>
-          <meshStandardMaterial color="#a78bfa" emissive="#a78bfa" emissiveIntensity={0.8} />
+          <meshStandardMaterial color="#f06bb8" emissive="#f06bb8" emissiveIntensity={0.8} />
         </Torus>
 
         {/* Electrons */}
@@ -194,7 +194,7 @@ function ElectronOrbit({ angle, speed }: { angle: number; speed: number }) {
 
   return (
     <Sphere ref={ref} args={[0.055, 8, 8]}>
-      <meshStandardMaterial color="#e0f2fe" emissive="#bae6fd" emissiveIntensity={2} />
+      <meshStandardMaterial color="#e3fcef" emissive="#00ed64" emissiveIntensity={2} />
     </Sphere>
   );
 }
@@ -205,8 +205,8 @@ function GlowOrb() {
     <Float speed={1.0} rotationIntensity={0.2} floatIntensity={0.5}>
       <Sphere args={[0.55, 48, 48]} position={[0, -1.2, 0.4]}>
         <MeshDistortMaterial
-          color="#4f46e5"
-          emissive="#4338ca"
+          color="#00ed64"
+          emissive="#00684a"
           emissiveIntensity={0.6}
           distort={0.45}
           speed={2}
@@ -228,7 +228,7 @@ function ParticleField() {
       scale={[7, 5, 4]}
       size={1.2}
       speed={0.35}
-      color="#818cf8"
+      color="#00ed64"
       opacity={0.7}
     />
   );
@@ -238,10 +238,10 @@ function ParticleField() {
 function FloatingSymbols() {
   const symbols = useMemo(
     () => [
-      { pos: [-1.2, 1.6, 0.5] as [number, number, number], color: "#f472b6", emissive: "#ec4899" },
-      { pos: [1.4, 1.5, -0.8] as [number, number, number], color: "#34d399", emissive: "#10b981" },
-      { pos: [-1.8, -1.0, 0.2] as [number, number, number], color: "#fbbf24", emissive: "#f59e0b" },
-      { pos: [1.9, -0.9, 0.6] as [number, number, number], color: "#60a5fa", emissive: "#3b82f6" },
+      { pos: [-1.2, 1.6, 0.5] as [number, number, number], color: "#f06bb8", emissive: "#f06bb8" },
+      { pos: [1.4, 1.5, -0.8] as [number, number, number], color: "#00ed64", emissive: "#00684a" },
+      { pos: [-1.8, -1.0, 0.2] as [number, number, number], color: "#fa6e39", emissive: "#fa6e39" },
+      { pos: [1.9, -0.9, 0.6] as [number, number, number], color: "#3d4f9f", emissive: "#3d4f9f" },
     ],
     []
   );
@@ -278,10 +278,10 @@ export default function Hero3DScene() {
       {/* Cinematic Lighting */}
       <ambientLight intensity={0.2} />
       <directionalLight position={[5, 8, 5]} intensity={1.5} color="#ffffff" castShadow />
-      <spotLight position={[0, 5, 0]} intensity={2.5} angle={0.6} penumbra={1} color="#e0e7ff" castShadow />
-      <pointLight position={[-4, 2, 2]} intensity={1.8} color="#6366f1" />
-      <pointLight position={[4, -2, -2]} intensity={1.5} color="#06b6d4" />
-      <pointLight position={[0, -3, 3]} intensity={1.2} color="#a78bfa" />
+      <spotLight position={[0, 5, 0]} intensity={2.5} angle={0.6} penumbra={1} color="#c3f0d2" castShadow />
+      <pointLight position={[-4, 2, 2]} intensity={1.8} color="#00ed64" />
+      <pointLight position={[4, -2, -2]} intensity={1.5} color="#003d4f" />
+      <pointLight position={[0, -3, 3]} intensity={1.2} color="#7b3ff2" />
 
       {/* Environment for reflections */}
       <Environment preset="city" />
@@ -318,3 +318,4 @@ export default function Hero3DScene() {
     </Canvas>
   );
 }
+

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ChevronDown, Sparkles } from "lucide-react";
+import { SectionHeader } from "../ui/section-header";
+import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
@@ -39,49 +40,60 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <Badge className="mb-4 gradient-btn text-white border-0 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide">
-            FAQ
-          </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Frequently Asked <span className="gradient-text">Questions</span>
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Everything you need to know about SkillBridge. Can&apos;t find the answer? Contact us anytime.
-          </p>
-        </div>
+    <section className="py-24 bg-white dark:bg-[#001e2b] relative overflow-hidden border-b border-slate-100 dark:border-emerald-950/20">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00ed64]/20 to-transparent" />
+      <div className="absolute bottom-1/2 right-0 w-[500px] h-[500px] bg-[#003d4f]/10 blur-[150px] rounded-full pointer-events-none" />
 
-        <div className="max-w-3xl mx-auto space-y-3">
+      <div className="container mx-auto px-4 relative z-10">
+        <SectionHeader
+          label="FAQ"
+          title={
+            <>Frequently Asked <span className="text-[#00ed64]">Questions</span></>
+          }
+          subtitle="Everything you need to know about SkillBridge. Can't find the answer? Contact us anytime."
+        />
+
+        <div className="max-w-3xl mx-auto space-y-4 mt-16">
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className="rounded-2xl border border-border/50 bg-card overflow-hidden transition-all duration-200"
+              className={`rounded-2xl border transition-all duration-300 glass-card overflow-hidden ${
+                open === i ? "border-[#00ed64]/50 shadow-[0_0_20px_rgba(0,237,100,0.15)] bg-[#00ed64]/5" : "border-slate-200 dark:border-emerald-950/40 hover:border-[#00ed64]/30"
+              }`}
             >
               <button
-                className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left group"
+                className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left group cursor-pointer"
                 onClick={() => setOpen(open === i ? null : i)}
               >
-                <span className="font-semibold text-base group-hover:text-primary transition-colors">
-                  {faq.q}
-                </span>
-                <ChevronDown
-                  className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-300 ${
-                    open === i ? "rotate-180 text-primary" : ""
-                  }`}
-                />
+                <div className="flex items-center gap-3">
+                  <Sparkles className={`w-5 h-5 transition-colors duration-300 hidden sm:block ${open === i ? "text-[#00ed64]" : "text-slate-500 group-hover:text-[#00ed64]/50"}`} />
+                  <span className={`font-display font-bold text-lg transition-colors duration-300 ${open === i ? "text-[#00b545] dark:text-[#00ed64]" : "text-slate-800 dark:text-slate-200 group-hover:text-[#00b545] dark:group-hover:text-[#00ed64]/80"}`}>
+                    {faq.q}
+                  </span>
+                </div>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${open === i ? "bg-[#00ed64]/20 text-[#00ed64]" : "bg-slate-100 dark:bg-emerald-950/20 text-slate-500 group-hover:bg-[#00ed64]/10 group-hover:text-[#00ed64]"}`}>
+                  <ChevronDown
+                    className={`w-5 h-5 transition-transform duration-300 ${
+                      open === i ? "rotate-180" : ""
+                    }`}
+                  />
+                </div>
               </button>
 
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  open === i ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <p className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
+              <AnimatePresence>
+                {open === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <div className="px-6 pb-6 pt-2 text-slate-600 dark:text-slate-300 leading-relaxed pl-6 sm:pl-14">
+                      {faq.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
