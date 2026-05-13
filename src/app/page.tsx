@@ -11,8 +11,10 @@ import HowItWorks from "@/components/sections/HowItWorks";
 import Testimonials from "@/components/sections/Testimonials";
 import CTABanner from "@/components/sections/CTABanner";
 import { ClassroomShowcase, CareerShowcase } from "@/components/sections/ShowcaseSections";
+import { AIShowcase } from "@/components/sections/AIShowcase";
+import { AIWhySection } from "@/components/sections/AIWhySection";
 import { Button } from "@/components/ui/button";
-import { Star, ArrowRight, GraduationCap } from "lucide-react";
+import { Star, ArrowRight, GraduationCap, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -102,6 +104,10 @@ export default async function Home() {
         <Hero />
         <TrustedBy />
         <StatsBar />
+        
+        <AIShowcase />
+        <AIWhySection />
+
         <WhySkillBridge />
 
         {/* Premium Lifestyle Showcase Sections */}
@@ -166,7 +172,10 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ─────────────────────────── FEATURED TUTORS ───────────────── */}
+
         <Pricing />
+
         <HowItWorks />
         {actualReviews.length >= 5 && <Testimonials reviews={actualReviews} />}
         <FAQ />

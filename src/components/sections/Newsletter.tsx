@@ -38,7 +38,7 @@ export default function Newsletter() {
       />
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

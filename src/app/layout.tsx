@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/Providers";
+import { FloatingAIWidget } from "@/components/ai/FloatingAIWidget";
 
 const outfit = Outfit({ 
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body className={`${dmSans.variable} ${outfit.variable} ${jetbrainsMono.variable} font-body antialiased`} suppressHydrationWarning>
         <Providers>
           {children}
+          <FloatingAIWidget />
         </Providers>
       </body>
     </html>

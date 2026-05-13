@@ -81,7 +81,7 @@ export default function Pricing() {
           <p className="text-slate-600 dark:text-slate-300 text-[16px] max-w-xl mx-auto mb-8">
             No subscription traps. No hidden fees. Pay only for what you use.
           </p>
-          
+
           {/* Monthly / Annual Toggle */}
           <div className="flex items-center justify-center gap-3">
             <span className={cn("text-[16px] font-bold transition-colors", !isAnnual ? "text-[#001e2b] dark:text-[#f8fafc]" : "text-slate-500")}>Monthly</span>

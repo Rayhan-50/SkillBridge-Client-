@@ -21,8 +21,8 @@ const validateWithZod = (schema: z.ZodTypeAny) => ({ value }: { value: string })
 
 const demoAccounts = [
   { label: "Student", email: "student@demo.com", password: "demo1234", color: "bg-teal-500/10 text-teal-600 dark:text-teal-400 border-teal-500/20 hover:bg-teal-500/20" },
-  { label: "Tutor", email: "tutor@demo.com", password: "demo1234", color: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20 hover:bg-violet-500/20" },
-  { label: "Admin", email: "admin@demo.com", password: "demo1234", color: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 hover:bg-amber-500/20" },
+  { label: "Teacher", email: "mia.taylor@academyhub.com", password: "Sh@1234344", color: "bg-violet-500/10 text-violet-600 dark:text-violet-400 border-violet-500/20 hover:bg-violet-500/20" },
+  { label: "Admin", email: "admin@skillbridge.com", password: "password123", color: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 hover:bg-amber-500/20" },
 ];
 
 export default function LoginPage() {
@@ -30,19 +30,50 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const form = useForm({
     defaultValues: { email: "", password: "" },
     onSubmit: async ({ value }) => {
       setLoading(true);
+      try {
+        await signIn.email({
+          email: value.email,
+          password: value.password,
+          fetchOptions: {
+            onSuccess: (ctx) => {
+              toast.success("Login successful!");
+              const role = ctx.data?.user?.role;
+              if (role === "ADMIN") router.push(ROUTES.ADMIN_DASHBOARD);
+              else if (role === "TUTOR") router.push(ROUTES.TUTOR_DASHBOARD);
+              else router.push(ROUTES.STUDENT_DASHBOARD);
+              router.refresh();
+            },
+            onError: (ctx) => {
+              toast.error(ctx.error.message || "Failed to log in.");
+              setLoading(false);
+            },
+          },
+        });
+      } catch (err) {
+        toast.error("An unexpected error occurred.");
+        setLoading(false);
+      }
+    },
+  });
+
+  const handleDemoLogin = async (demoEmail: string, demoPassword: string) => {
+    // Fill form fields for visual feedback
+    form.setFieldValue("email", demoEmail);
+    form.setFieldValue("password", demoPassword);
+    
+    setLoading(true);
+    try {
       await signIn.email({
-        email: value.email,
-        password: value.password,
+        email: demoEmail,
+        password: demoPassword,
         fetchOptions: {
           onSuccess: (ctx) => {
-            toast.success("Login successful!");
+            toast.success(`${ctx.data?.user?.name || "Demo"} login successful!`);
             const role = ctx.data?.user?.role;
             if (role === "ADMIN") router.push(ROUTES.ADMIN_DASHBOARD);
             else if (role === "TUTOR") router.push(ROUTES.TUTOR_DASHBOARD);
@@ -50,34 +81,16 @@ export default function LoginPage() {
             router.refresh();
           },
           onError: (ctx) => {
-            toast.error(ctx.error.message || "Failed to log in.");
+            console.error("Demo login error detail:", ctx.error);
+            toast.error(ctx.error.message || "Demo account not available.");
             setLoading(false);
           },
         },
       });
-    },
-  });
-
-  const handleDemoLogin = async (demoEmail: string, demoPassword: string) => {
-    setLoading(true);
-    await signIn.email({
-      email: demoEmail,
-      password: demoPassword,
-      fetchOptions: {
-        onSuccess: (ctx) => {
-          toast.success("Demo login successful!");
-          const role = ctx.data?.user?.role;
-          if (role === "ADMIN") router.push(ROUTES.ADMIN_DASHBOARD);
-          else if (role === "TUTOR") router.push(ROUTES.TUTOR_DASHBOARD);
-          else router.push(ROUTES.STUDENT_DASHBOARD);
-          router.refresh();
-        },
-        onError: () => {
-          toast.error("Demo account not available. Please use your own credentials.");
-          setLoading(false);
-        },
-      },
-    });
+    } catch (err) {
+      toast.error("An unexpected error occurred during demo login.");
+      setLoading(false);
+    }
   };
 
   const handleGoogleLogin = async () => {

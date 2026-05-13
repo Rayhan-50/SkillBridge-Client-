@@ -17,7 +17,7 @@ export default function Testimonials({ reviews }: TestimonialsProps) {
             <div className="absolute inset-0 bg-gradient-to-br from-[#00ed64]/5 via-transparent to-[#003d4f]/5 pointer-events-none" />
             <div className="absolute left-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-[#00ed64]/5 blur-[150px] rounded-full pointer-events-none" />
             <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-[#003d4f]/10 blur-[150px] rounded-full pointer-events-none" />
-            
+
             <div className="container mx-auto px-4 relative z-10">
                 <SectionHeader
                     label="Testimonials"
@@ -27,7 +27,7 @@ export default function Testimonials({ reviews }: TestimonialsProps) {
                     subtitle="Real stories from real learners who transformed their skills with SkillBridge."
                 />
 
-                <motion.div 
+                <motion.div
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="visible"

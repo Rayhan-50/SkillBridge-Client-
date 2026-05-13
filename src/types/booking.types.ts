@@ -22,4 +22,3 @@ export interface Booking {
     createdAt: Date;
     updatedAt: Date;
 }
-

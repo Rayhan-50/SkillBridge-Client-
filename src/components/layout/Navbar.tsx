@@ -6,9 +6,9 @@ import { ROUTES } from "@/constants/routes";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import {
-  Moon, Sun, Menu, Leaf, LayoutDashboard, Calendar, Settings,
+  Moon, Sun, Menu, Leaf, LayoutDashboard, Settings,
   LogOut, Search, User, BookOpen, Info, Mail, FileText,
-  ChevronDown, GraduationCap, BarChart2
+  ChevronDown, GraduationCap, BarChart2, Sparkles
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState, useEffect } from "react";
@@ -60,17 +60,16 @@ export function Navbar() {
   // Logged-out links (4+)
   const publicLinks = [
     { name: "Find Tutors", href: ROUTES.TUTORS, icon: Search },
+    { name: "AI Lab", href: "/ai-dashboard", icon: Sparkles },
     { name: "Categories", href: ROUTES.CATEGORIES, icon: GraduationCap },
-    { name: "Blog", href: ROUTES.BLOG, icon: BookOpen },
     { name: "About", href: ROUTES.ABOUT, icon: Info },
   ];
 
   // Additional logged-in links (6+ total)
   const authLinks = [
     { name: "Find Tutors", href: ROUTES.TUTORS, icon: Search },
-    { name: "Categories", href: ROUTES.CATEGORIES, icon: GraduationCap },
+    { name: "AI Lab", href: "/ai-dashboard", icon: Sparkles },
     { name: "Dashboard", href: getDashboardRoute(), icon: LayoutDashboard },
-    { name: "Blog", href: ROUTES.BLOG, icon: BookOpen },
     { name: "About", href: ROUTES.ABOUT, icon: Info },
     { name: "Contact", href: ROUTES.CONTACT, icon: Mail },
   ];
@@ -97,9 +96,14 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href={ROUTES.HOME} className="flex items-center space-x-2.5 group">
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-950/40 shadow-sm group-hover:scale-105 transition-transform duration-300">
-            <Leaf className="h-5 w-5 text-[#00ed64] fill-[#00ed64]/10" />
-            <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#00ed64] rounded-full border-2 border-white dark:border-[#001e2b]" />
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-emerald-500/10 shadow-sm group-hover:scale-105 transition-transform duration-300">
+            <motion.div
+              animate={{ rotate: [0, 10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Leaf className="h-5 w-5 text-[#00ed64] fill-[#00ed64]/10" />
+            </motion.div>
+            <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-[#00ed64] rounded-full border-2 border-white dark:border-[#0f172a]" />
           </div>
           <span className="font-display font-medium text-2xl tracking-tight text-slate-900 dark:text-slate-50">
             Skill<span className="text-[#00ed64]">Bridge</span>
@@ -169,8 +173,8 @@ export function Navbar() {
               href={ROUTES.CONTACT}
               className={cn(
                 "relative px-4 py-2 rounded-full text-[13px] font-medium transition-all duration-300",
-                pathname === ROUTES.CONTACT 
-                  ? "text-[#00b545] dark:text-[#00ed64] bg-emerald-50 dark:bg-emerald-950/40" 
+                pathname === ROUTES.CONTACT
+                  ? "text-[#00b545] dark:text-[#00ed64] bg-emerald-50 dark:bg-emerald-950/40"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-100 dark:hover:bg-slate-800"
               )}
             >
@@ -213,12 +217,12 @@ export function Navbar() {
           ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger className="relative h-10 w-10 rounded-full p-0 border-2 border-emerald-100 dark:border-emerald-500/20 hover:border-[#00ed64]/50 transition-colors overflow-hidden focus:outline-none">
-                  <Avatar className="h-full w-full">
-                    <AvatarImage src={user.image || ""} alt={user.name} />
-                    <AvatarFallback className="bg-emerald-50 dark:bg-emerald-950/40 text-[#00b545] dark:text-[#00ed64] text-sm font-medium">
-                      {user.name?.charAt(0) || "U"}
-                    </AvatarFallback>
-                  </Avatar>
+                <Avatar className="h-full w-full">
+                  <AvatarImage src={user.image || ""} alt={user.name} />
+                  <AvatarFallback className="bg-emerald-50 dark:bg-emerald-950/40 text-[#00b545] dark:text-[#00ed64] text-sm font-medium">
+                    {user.name?.charAt(0) || "U"}
+                  </AvatarFallback>
+                </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-64 bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[16px] shadow-lg p-2" align="end" sideOffset={8}>
                 <DropdownMenuGroup>

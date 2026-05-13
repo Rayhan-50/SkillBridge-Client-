@@ -14,7 +14,7 @@ export function StatsBar() {
     return (
         <section className="bg-white dark:bg-[#001e2b] relative border-y border-slate-100 dark:border-emerald-950/20 py-16 overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
-                <motion.div 
+                <motion.div
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="visible"

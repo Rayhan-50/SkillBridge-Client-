@@ -23,8 +23,8 @@ export default function HowItWorks() {
                     }
                     subtitle="Get started in minutes with three easy steps."
                 />
-                
-                <motion.div 
+
+                <motion.div
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="visible"
